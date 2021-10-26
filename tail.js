@@ -3,7 +3,6 @@ const arrayAssertEqual = function(arr1, arr2) {
     console.log(`⚠️     Assertion Failed: ${arr1} !== ${arr2}`);
     return false;
   }
-  
   for (let i = 0; i < arr1.length; i++) {
     if (arr1[i] !== arr2 [i]) {
       console.log(`⚠️      Assertion Failed: ${arr1} !== ${arr2}`);
@@ -15,10 +14,15 @@ const arrayAssertEqual = function(arr1, arr2) {
 };
 
 const tail = function(arr) {
-  return arr.splice(1,arr.length);
-};
+  return arr.slice(1,arr.length);
+}
 
 console.log(tail([1]));
 console.log(tail([]));
 arrayAssertEqual(tail([1,1,3]),[1,3]);
 arrayAssertEqual(tail([1]),[]);
+
+//testing unmodified original array
+let originalArray = [1,2,3,4,5];
+tail(originalArray);
+arrayAssertEqual(originalArray,[1,2,3,4,5]);
