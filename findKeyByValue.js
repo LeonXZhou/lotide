@@ -5,18 +5,15 @@ const assertEqual = function(actual, expected) {
     console.log(`⚠️   Assertion Failed: ${actual} (${typeof(actual)}) !== ${expected} (${typeof(expected)})`);
   }
 };
-const findKeyByValue = function(object, targetValue)
-{
-  for (o in object)
-  {
-    if (object[o] === targetValue)
-    {
+const findKeyByValue = function(object, targetValue) {
+  for (const o in object) {
+    if (object[o] === targetValue) {
       return o;
     }
   }
-}
+};
 
-const bestTVShowsByGenre = { 
+const bestTVShowsByGenre = {
   sci_fi: "The Expanse",
   comedy: "Brooklyn Nine-Nine",
   drama:  "The Wire"
