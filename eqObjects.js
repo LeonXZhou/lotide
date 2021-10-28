@@ -10,8 +10,7 @@ const eqObjects = function(object1, object2) {
     } else if (Object.getPrototypeOf(object1[obj1]) !== (Object.getPrototypeOf(object2[obj1]))) {
       return false;
     } else if (typeof object1[obj1] === 'object' && typeof object2[obj1] === 'object') {
-      if (!(eqObjects(object1[obj1],object2[obj1])))
-      {
+      if (!(eqObjects(object1[obj1],object2[obj1]))) {
         return false;
       }
     }
@@ -37,6 +36,7 @@ const eqObjects = function(object1, object2) {
 let ab = { a: [], b: "2" };
 let ba = { b: "2", a: {}};
 console.log('false miss match object prototype', eqObjects(ab, ba));
+console.log('----------');
 
 ab = { a: [], b: "2" };
 ba = { b: "2", a: Number(3)};
@@ -67,6 +67,11 @@ ba = Number(3);
 console.log('true equal wrapper object', eqObjects(ab, ba));
 console.log('----------');
 
+ab = Number(3);
+ba = String(3);
+console.log('false missmatched wrapper object type', eqObjects(ab, ba));
+console.log('----------');
+
 let cd = { c: "1", d: ["2", 3] };
 let dc = { d: ["2", 3], c: "1" };
 console.log('true equal array', eqObjects(cd, dc));
@@ -77,7 +82,11 @@ console.log('false different array' ,eqObjects(cd, cd2));
 console.log('----------');
 
 cd = { c: "1", d: ["2", 3 ,[3,4]] ,e: 'asdf'};
-dc = { d: ["2", 3, [3,4]], c: "1" ,e: 'sdf'};
+dc = { d: ["2", 3, [3,4]], c: "1" ,e: 'asdf'};
 console.log('true nested equal array', eqObjects(cd, dc));
 console.log('----------');
 
+cd = { c: "1", d: ["2", 3 ,[3,4]] ,e: { d: ["2", 3, [2,4]], c: "1" ,e: 'asdf'}};
+dc = { d: ["2", 3, [3,4]], c: "1" ,e: { d: ["2", 3, [3,4]], c: "1" ,e: 'asdf'}};
+console.log('false missmatching value in array', eqObjects(cd, dc));
+console.log('----------');
