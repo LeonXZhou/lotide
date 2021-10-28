@@ -10,7 +10,10 @@ const eqObjects = function(object1, object2) {
     } else if (Object.getPrototypeOf(object1[obj1]) !== (Object.getPrototypeOf(object2[obj1]))) {
       return false;
     } else if (typeof object1[obj1] === 'object' && typeof object2[obj1] === 'object') {
-      return eqObjects(object1[obj1],object2[obj1]);
+      if (!(eqObjects(object1[obj1],object2[obj1])))
+      {
+        return false;
+      }
     }
   }
   return true;
@@ -73,8 +76,8 @@ let cd2 = { c: "1", d: ["2", 3, 4] };
 console.log('false different array' ,eqObjects(cd, cd2));
 console.log('----------');
 
-cd = { c: "1", d: ["2", 3 ,[3,4]] };
-dc = { d: ["2", 3, [3,4]], c: "1" };
+cd = { c: "1", d: ["2", 3 ,[3,4]] ,e: 'asdf'};
+dc = { d: ["2", 3, [3,4]], c: "1" ,e: 'sdf'};
 console.log('true nested equal array', eqObjects(cd, dc));
 console.log('----------');
 
